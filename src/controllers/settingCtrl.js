@@ -12,7 +12,8 @@ const getSetting = async (req, res) => {
 const setSetting = async (req, res) => {
     try {
         let setting = req.body;
-        let result = await settingModel.create(setting);
+        await settingModel.updateOne(null, setting);
+        let result = await settingModel.findOne(setting);
         res.json(result);
     } catch (err) {
         res.status(500).send(err.toString());
